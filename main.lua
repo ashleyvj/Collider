@@ -1,8 +1,18 @@
------------------------------------------------------------------------------------------
---
--- main.lua
---
------------------------------------------------------------------------------------------
+-- README header
+--code for the 'collider' game
+--code in lua programming language
+--main.lua
+
+
+-- hide the status bar
+display.setStatusBar( display.HiddenStatusBar )
+
+-- include the Corona "composer" module
+local composer = require "composer"
+
+-- load menu screen
+composer.gotoScene( "menu" )
+
 --getting widget API
 local widget = require "widget"
 
@@ -35,10 +45,12 @@ local platform5=display.newImageRect("button.png",54,20)
 platform5.x=display.contentCenterX
 platform5.y=display.contentCenterY-250
 
+--balloon
 local object=display.newImageRect("balloon.png",30,35)
 object.x=display.contentCenterX
 object.y=display.contentCenterY-220
 
+--starting the physics engine
 local physics=require("physics")
 physics.start()
 physics.setGravity(0,75)
@@ -53,17 +65,14 @@ physics.addBody(platform4,"static")
 physics.addBody(platform5,"static")
 physics.addBody(object,"dynamic", {radius=20,bounce=1.05})
 
-k=1
-while(k>0)
-do
-	local function tapListener( event )
- 
-	-- Code executed when the button is tapped
+--code for the touch interface
+local function tapListener( event ) 
+    -- Code executed when the button is tapped
 	platform2:setLinearVelocity(900,0)
     print( "Object tapped: " .. tostring(event.target) )  -- "event.target" is the tapped object
     return true
-	end
 end
+
  
 local myButton = display.newRect( 50, 50, 50, 50 )
 myButton:addEventListener( "tap", tapListener )  -- Add a "tap" listener to the object
